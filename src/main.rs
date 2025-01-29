@@ -43,6 +43,7 @@ fn main() {
     let mut vao = 0;
     let mut vbo = 0;
     let mut ebo = 0;
+
     #[rustfmt::skip]
     let vertices: &[f32] = &[
         // position    // texture
@@ -218,7 +219,7 @@ fn main() {
             glam::Mat4::orthographic_rh_gl(left, right, bottom, top, -1.0, 1.0);
 
         unsafe {
-            gl::ClearColor(0.2, 0.3, 0.3, 1.0);
+            gl::ClearColor(0.09, 0.09, 0.09, 1.0);
             gl::Clear(gl::COLOR_BUFFER_BIT);
 
             shader.use_shader();
@@ -287,7 +288,7 @@ fn screenshot() -> ((i32, i32), Vec<u8>) {
                 ((pixel & blue_mask) >> blue_mask.trailing_zeros()) as _,
             ];
 
-            // Calculate the index for the flipped image
+            // flipping the image
             let index = (((height - 1 - y) * width + x) * 3) as usize;
             buf[index..index + 3].copy_from_slice(&rgb);
         }
